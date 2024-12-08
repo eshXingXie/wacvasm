@@ -1,0 +1,32 @@
+[
+    {
+        "caretX": 92,
+        "caretY": 111,
+        "filename": "C:/Users/esh/Documents/projects/wacvasm/wacvasm.c",
+        "focused": true,
+        "isOpen": true,
+        "left": 0,
+        "order": 0,
+        "top": 3458
+    },
+    {
+        "caretX": 29,
+        "caretY": 4,
+        "filename": "C:/Users/esh/Documents/projects/wacvasm/correction.h",
+        "focused": false,
+        "isOpen": true,
+        "left": 0,
+        "order": 1,
+        "top": 0
+    },
+    {
+        "caretX": 20,
+        "caretY": 17,
+        "filename": "C:/Users/esh/Documents/projects/wacvasm/wacva.h",
+        "focused": false,
+        "isOpen": true,
+        "left": 0,
+        "order": 2,
+        "top": 0
+    }
+]

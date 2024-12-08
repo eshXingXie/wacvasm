@@ -28,14 +28,14 @@ enum op_t{
 	EQU=unextend(0X9),
 	CMP=unextend(0XA),
 	XOR=unextend(0xB),
-	OR=unextend(0xC),
+	ORB=unextend(0xC),
 	AND=unextend(0XD),
 	NOT=unextend(0XE),
 	
 	JMP=extend(0XF0),
 	JIF=extend(0XF1),
 	JNF=extend(0XF2),
-	BLI=extend(0XF3)
+	MVB=extend(0XF3)
 };
 
 #endif

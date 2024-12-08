@@ -29,7 +29,7 @@ wacvasm.exe: $(OBJ)
 
 	$(CC) $(LINKOBJ) -o "wacvasm.exe" $(LIBS)
 
-wacvasm.o: wacvasm.c wacva.h correction.h
+wacvasm.o: wacvasm.c correction.h wacva.h
 	$(CC) -c "wacvasm.c" -o "wacvasm.o" $(CFLAGS) 
 
 wacvasm_private.res: wacvasm_private.rc 

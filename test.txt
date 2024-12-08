@@ -1,3 +1,2 @@
-mov abc
-bac	!test1.txt
-mnb
+movUW HUWffff HUWaaaa :strt
+jmp @strt

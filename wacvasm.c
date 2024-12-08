@@ -130,6 +130,8 @@ write_file(){
 				fwrite(&(tag_lst_begin->addr),sizeof(uint32_t),1,ofp);
 				pos+=ulng_step;
 			}
+			fwrite(&(tag_pos->addr),sizeof(uint32_t),1,ofp);
+			pos+=ulng_step;
 		}
 		else if(token_lst_pos->s[0]=='\"'){
 			fwrite(token_lst_pos->s+1,sizeof(char),strlen(token_lst_pos->s+1),ofp);
@@ -215,6 +217,50 @@ write_file(){
 				}
 			}
 		}
+		else{
+			str cmp=(str)malloc(64*sizeof(char));
+			strcpy(cmp,token_lst_pos->s);
+			cmp[4]=0;
+			uint8_t op;
+			char is_ex=0;
+			if(strcmp(cmp,"mov")==0) op=MOV;
+			else if(strcmp(cmp,"pus")==0) op=PUS;
+			else if(strcmp(cmp,"pop")==0) op=PUS;
+			else if(strcmp(cmp,"plu")==0) op=PUS;
+			else if(strcmp(cmp,"sub")==0) op=PUS;
+			else if(strcmp(cmp,"mul")==0) op=PUS;
+			else if(strcmp(cmp,"div")==0) op=PUS;
+			else if(strcmp(cmp,"equ")==0) op=PUS;
+			else if(strcmp(cmp,"cmp")==0) op=PUS;
+			else if(strcmp(cmp,"xor")==0) op=PUS;
+			else if(strcmp(cmp,"orb")==0) op=PUS;
+			else if(strcmp(cmp,"and")==0) op=PUS;
+			else if(strcmp(cmp,"not")==0) op=PUS;
+			else{
+				if(strcmp(cmp,"jmp")==0) op=JMP;
+				else if(strcmp(cmp,"jif")==0) op=JIF;
+				else if(strcmp(cmp,"jnf")==0) op=JNF;
+				else if(strcmp(cmp,"mvb")==0) op=MVB;
+				is_ex=1;
+			}
+			if(!is_ex){
+				if(token_lst_pos->s[3]=='u') op+=0b1000;
+				switch (token_lst_pos->s[4]) {
+				case 'b':
+					op+=0b0100;
+					break;
+				case 'w':
+					op+=0b0010;
+					break;
+				case 'l':
+					op+=0b0001;
+					break;
+				}
+			}
+			fwrite(&op,sizeof(uint8_t),1,ofp);
+			pos+=ubyt_step;
+			free(cmp);
+		}
 		token_lst_pos=token_lst_pos->nxt;
 	}
 }
@@ -233,6 +279,7 @@ free_token_lst(){
 int 
 main(int argc,char*argv[]){
 	ifp = fopen(argv[1],"r");
+	ofp = fopen(argv[2],"w");
 	token_lst_begin=(struct lst_t*)malloc(sizeof(struct lst_t));
 	token_lst_begin->s=(str)malloc(4*sizeof(char));
 	strcpy(token_lst_begin->s,"abc");
@@ -245,7 +292,7 @@ main(int argc,char*argv[]){
 	tag_lst_begin->addr=0x0;
 	tag_lst_pos = tag_lst_begin;
 	cons_token(ifp,argv[1]);
-	
+	write_file();
 	free_token_lst();
 	fcloseall();
 	return 0;

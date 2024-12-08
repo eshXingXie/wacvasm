@@ -1,2 +1,5 @@
-a simple and junky bytecode asm for wacva vm
+#THIS PROJECT IS NOT DONE YET
+
+a simple and junky bytecode asm for wacva vm  
+
 this is my first project btw
